@@ -1,1 +1,4 @@
 local.settings.json
+azurite-debug.log
+azurite-data/
+__azurite_db_*
