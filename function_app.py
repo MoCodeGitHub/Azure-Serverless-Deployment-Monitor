@@ -6,14 +6,14 @@ import requests
 
 app = func.FunctionApp()
 
+@app.function_name(name="url_monitor")
 @app.timer_trigger(
-    schedule="0 */5 * * * *",
     arg_name="myTimer",
-    run_on_startup=False
+    schedule="0 */5 * * * *",
+    run_on_startup=True,
+    use_monitor=False
 )
-
 def url_monitor(myTimer: func.TimerRequest) -> None:
-
     utc_timestamp = datetime.datetime.utcnow().isoformat()
 
     logging.info("URL Monitor started at %s", utc_timestamp)
@@ -23,15 +23,10 @@ def url_monitor(myTimer: func.TimerRequest) -> None:
             urls = json.load(file)
 
         for url in urls:
-
             try:
                 response = requests.get(url, timeout=10)
 
-                status = (
-                    "UP"
-                    if response.status_code < 400
-                    else "DOWN"
-                )
+                status = "UP" if response.status_code < 400 else "DOWN"
 
                 logging.info(
                     "URL: %s | Status: %s | Code: %s | Time: %s",
@@ -42,7 +37,6 @@ def url_monitor(myTimer: func.TimerRequest) -> None:
                 )
 
             except requests.RequestException as error:
-
                 logging.error(
                     "URL: %s | Status: DOWN | Error: %s | Time: %s",
                     url,
@@ -51,8 +45,4 @@ def url_monitor(myTimer: func.TimerRequest) -> None:
                 )
 
     except Exception as error:
-
-        logging.error(
-            "Monitor failed: %s",
-            str(error)
-        )
+        logging.error("Monitor failed: %s", str(error))
