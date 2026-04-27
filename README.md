@@ -3,6 +3,7 @@
 <img width="1911" height="908" alt="Image" src="https://github.com/user-attachments/assets/f6dbdfe5-449b-41dc-b6c6-4aff8e1c12e9" />
 
 
+
 ## 📌 Project Overview
 
 The **Azure Serverless Deployment Monitor** is a Python-based Azure Function that automatically monitors website availability on a scheduled timer, demonstrating how to build, test, and deploy a serverless monitoring solution using Azure Functions, Azure Storage, and Azure CLI.
@@ -14,6 +15,7 @@ The function runs every 5 minutes, checks configured URLs, and logs their availa
 ## Architecture
 
 <img width="1897" height="528" alt="Image" src="https://github.com/user-attachments/assets/bd23ca10-eb99-4ccd-b43a-55a5f6a197da" />
+
 
 
 This project uses a **serverless architecture** hosted in Microsoft Azure.
